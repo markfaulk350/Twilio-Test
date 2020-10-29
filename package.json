@@ -1,0 +1,31 @@
+{
+  "name": "Twilio-Test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markfaulk350/Twilio-Test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/markfaulk350/Twilio-Test/issues"
+  },
+  "homepage": "https://github.com/markfaulk350/Twilio-Test#readme",
+  "dependencies": {
+    "@types/node": "^14.14.6",
+    "axios": "^0.21.0",
+    "dotenv": "^8.2.0",
+    "qs": "^6.9.4"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/dotenv": "^8.2.0",
+    "@types/qs": "^6.9.5"
+  }
+}
