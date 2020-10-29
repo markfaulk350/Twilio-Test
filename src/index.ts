@@ -3,37 +3,31 @@ dotenv.config()
 
 const log = console.log
 
-import qs from 'qs'
-import axios from 'axios'
-import { AxiosRequestConfig } from 'axios'
+import twilio from 'twilio'
 
 async function main() {
   try {
-    const base_url = 'https://api.twilio.com/2010-04-01'
-    let url = `${base_url}/Accounts/${process.env.TEST_TWILIO_ACCOUNT_SID}/Calls.json`
+    const client = await twilio(
+      process.env.TWILIO_ACCOUNT_SID,
+      process.env.TWILIO_AUTH_TOKEN,
+    )
 
-    const data: any = {
-      To: '+16166359732',
-      From: '+17608460475',
-    }
-
-    const config: AxiosRequestConfig = {
-      headers: {
-        'content-type': 'application/x-www-form-urlencoded',
-        // Authorization: `Basic ${
-        //   process.env.TWILIO_ACCOUNT_SID + ':' + process.env.TWILIO_AUTH_TOKEN
-        // }`,
+    client.calls.create(
+      {
+        url: 'http://demo.twilio.com/docs/voice.xml',
+        // to: '+16166359732',  // Ryan
+        to: '+17608460475', // Mark
+        // from: '+17608460475',  // Mark
+        from: '+12058464907', // Twilio
       },
-      auth: {
-        username: process.env.TEST_TWILIO_ACCOUNT_SID || '',
-        password: process.env.TEST_TWILIO_AUTH_TOKEN || ''
-      }
-    }
-
-    const res = await axios.post(url, qs.stringify(data), config)
-    log(res.data)
-
-
+      (err, call) => {
+        if (err) {
+          log(err)
+        } else {
+          log(call.sid)
+        }
+      },
+    )
   } catch (err) {
     log(err)
   }
