@@ -14,7 +14,11 @@ async function main() {
 
     client.calls.create(
       {
-        url: 'http://demo.twilio.com/docs/voice.xml',
+        // url: 'http://demo.twilio.com/docs/voice.xml',
+        // url: '',
+        // url: `http://${request.headers.host}/outbound/${encodeURIComponent(
+        //   salesNumber,
+        // )}`,
         // to: '+16166359732',  // Ryan
         to: '+17608460475', // Mark
         // from: '+17608460475',  // Mark
@@ -31,6 +35,17 @@ async function main() {
   } catch (err) {
     log(err)
   }
+
+  // Send TXT Message
+  // ============================================================
+  // client.messages
+  //   .create({
+  //     body: 'Hello from Node',
+  //     to: '+17608460475', // Text this number
+  //     from: '+12058464907', // From a valid Twilio number
+  //   })
+  //   .then(message => console.log(message.sid))
+  // ============================================================
 }
 
 main()
