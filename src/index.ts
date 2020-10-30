@@ -24,19 +24,24 @@ app.get('/call', async (req, res) => {
 
     client.calls.create(
       {
-        // url: 'http://demo.twilio.com/docs/voice.xml',
-        // url: `http://79aa7f943887.ngrok.io/outbound/${encodeURIComponent(
-        //   '+17608460475',
-        // )}`,
 
-        url: `http://${req.headers.host}/outbound/${encodeURIComponent('+17608460475')}`,
-        // url: `http://${request.headers.host}/outbound/${encodeURIComponent(
-        //   salesNumber,
-        // )}`,
-        // to: '+16166359732',  // Ryan
+        // url: `http://${req.headers.host}/outbound/${encodeURIComponent('+17608460475')}`,
+        // to: '+17603900964', // Mom
+        // from: '+12058464907', // Twilio
+
+
+        url: `http://${req.headers.host}/outbound/${encodeURIComponent('+16166359732')}`,
         to: '+17608460475', // Mark
-        // from: '+17608460475',  // Mark
         from: '+12058464907', // Twilio
+
+
+        // url: 'http://demo.twilio.com/docs/voice.xml',
+        // url: `http://${req.headers.host}/outbound/${encodeURIComponent('+17608460475')}`,
+        // to: '+16166359732',  // Ryan
+        // to: '+17603900964',
+        // to: '+17608460475', // Mark
+        // from: '+17608460475',  // Mark
+        // from: '+12058464907', // Twilio
         // twiml: 'Hello World how are you today',
         // from: '+17605944465' // Richie
       },
@@ -58,10 +63,12 @@ app.post('/outbound/:salesNumber', function(request, response) {
   var salesNumber = request.params.salesNumber;
   var twimlResponse = new VoiceResponse();
 
+  twimlResponse.play({ loop: 1 }, 'https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3')
+
   // twimlResponse.say('Thanks for contacting our sales department. Our next available representative will take your call.');
   twimlResponse.say({
     voice: 'alice'
-  }, `Hey Ryan it's Mark. What does a robot do at the end of a one night stand? He nuts and bolts. Ha Ha Ha Ha Ha Ha. This message would normally say something like thanks for contacting our loan department. Our next available representative will take your call. In the end, they will be forwarded to the loan officer specified in hub spot. This should automatically call my cell phone number now.`);
+  }, `Hey Ryan it's Mark. What does a robot do at the end of a one night stand? He nuts and bolts. Ha Ha Ha Ha Ha Ha. This message would normally say something like thanks for contacting our loan department. Our next available representative will take your call. This should automatically dial my cell phone number now. Wait a few seconds please.`);
 
   twimlResponse.dial(salesNumber);
 
