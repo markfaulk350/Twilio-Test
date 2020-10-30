@@ -24,26 +24,22 @@ app.get('/call', async (req, res) => {
 
     client.calls.create(
       {
-
+        // Mom then Mark
         // url: `http://${req.headers.host}/outbound/${encodeURIComponent('+17608460475')}`,
         // to: '+17603900964', // Mom
         // from: '+12058464907', // Twilio
 
 
-        url: `http://${req.headers.host}/outbound/${encodeURIComponent('+16166359732')}`,
-        to: '+17608460475', // Mark
+        // Mark then Ryan
+        // url: `http://${req.headers.host}/outbound/${encodeURIComponent('+16166359732')}`,
+        // to: '+17608460475', // Mark
+        // from: '+12058464907', // Twilio
+
+        // Ryan then Mark
+        url: `http://${req.headers.host}/outbound/${encodeURIComponent('+17608460475')}`,
+        to: '+16166359732', // Ryan
         from: '+12058464907', // Twilio
 
-
-        // url: 'http://demo.twilio.com/docs/voice.xml',
-        // url: `http://${req.headers.host}/outbound/${encodeURIComponent('+17608460475')}`,
-        // to: '+16166359732',  // Ryan
-        // to: '+17603900964',
-        // to: '+17608460475', // Mark
-        // from: '+17608460475',  // Mark
-        // from: '+12058464907', // Twilio
-        // twiml: 'Hello World how are you today',
-        // from: '+17605944465' // Richie
       },
       (err, call) => {
         if (err) {
@@ -63,12 +59,27 @@ app.post('/outbound/:salesNumber', function(request, response) {
   var salesNumber = request.params.salesNumber;
   var twimlResponse = new VoiceResponse();
 
-  twimlResponse.play({ loop: 1 }, 'https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3')
+  twimlResponse.play({ loop: 1 }, 'https://raw.githubusercontent.com/markfaulk350/Twilio-Test/main/step_brothers.mp3')
+
+  // twimlResponse.say({
+  //   voice: 'alice'
+  // }, `What does a robot do at the end of a one night stand?`);
+
+  // twimlResponse.say({
+  //   voice: 'man'
+  // }, `What?`);
+
+  // twimlResponse.say({
+  //   voice: 'alice'
+  // }, `He nuts and bolts. Ha Ha Ha Ha Ha Ha.`);
 
   // twimlResponse.say('Thanks for contacting our sales department. Our next available representative will take your call.');
+
   twimlResponse.say({
     voice: 'alice'
-  }, `Hey Ryan it's Mark. What does a robot do at the end of a one night stand? He nuts and bolts. Ha Ha Ha Ha Ha Ha. This message would normally say something like thanks for contacting our loan department. Our next available representative will take your call. This should automatically dial my cell phone number now. Wait a few seconds please.`);
+  }, `Hey Ryan it's Mark. This message would normally say something like thanks for contacting our loan department. Our next available representative will take your call. As you can already tell we can play mp3 audio files or have robots convert text to speech. This should automatically dial my cell phone number now. Wait a few seconds please.`);
+
+
 
   twimlResponse.dial(salesNumber);
 
